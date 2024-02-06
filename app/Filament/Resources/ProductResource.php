@@ -42,7 +42,7 @@ class ProductResource extends Resource
                     'product3' => 'Product3',
                 ]),
 
-                Forms\Components\RichEditor::make('description')
+                Forms\Components\MarkdownEditor::make('description')
                 ->hint('What is this product ?')
                 ->hintColor('primary'),
 
@@ -62,10 +62,22 @@ class ProductResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('name')
+                ->searchable(),
+                Tables\Columns\TextColumn::make('store.name'),
+                Tables\Columns\TextColumn::make('category'),
+                Tables\Columns\TextColumn::make('description'),
+                Tables\Columns\TextColumn::make('price')->sortable(),
+
             ])
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('category')
+                ->options([
+                    'product1' => 'Product1',
+                    'product2' => 'Product2',
+                    'product3' => 'Product3',
+                ]),
+
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

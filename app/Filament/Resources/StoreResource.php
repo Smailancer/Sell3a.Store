@@ -40,7 +40,9 @@ class StoreResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\ImageColumn::make('logo'),
+                Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('description')
             ])
             ->filters([
                 //

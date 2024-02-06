@@ -12,14 +12,14 @@ class Product extends Model
     use HasFactory;
 
 
-        public function store()
-            {
-                return $this->belongsTo(Store::class);
+    public function store()
+        {
+            return $this->belongsTo(Store::class);
+        }
 
-            }
+    public function orders()
+    {
+        return $this->belongsToMany(Order::class)->withPivot('quantity');
+    }
 
-        public function order()
-            {
-                return $this->belongsTo(Order::class);
-            }
 }

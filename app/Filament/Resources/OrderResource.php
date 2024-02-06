@@ -26,11 +26,38 @@ class OrderResource extends Resource
                 Forms\Components\Select::make('product_id')
                 ->relationship('products', 'name')
                 ->required()
-                ->multiple()
+                ->searchable()
                 ->preload()
-                ->label("Chose a product"),
+                ->required()
+                ->label("Chose a product")
+                ->createOptionForm([
+                    Forms\Components\TextInput::make('name')
+                        ->required()
+                        ->maxLength(255),
+                    Forms\Components\Select::make('store_id')
+                        ->relationship('store', 'name')
+                        ->required()
+                        ->label("Chose a Store"),
+                    Forms\Components\Select::make('category')
+                        ->options([
+                            'product1' => 'Product1',
+                            'product2' => 'Product2',
+                            'product3' => 'Product3',
+                        ]),
+                    Forms\Components\TextInput::make('price')
+                            ->numeric()
+                            ->inputMode('decimal'),
+                    Forms\Components\RichEditor::make('description')
+                        ->hint('What is this product ?')
+                        ->hintColor('primary')
 
-                Forms\Components\KeyValue::make('client_info'),
+                ]),
+
+                Forms\Components\TextInput::make('name')->label("Client Name"),
+                Forms\Components\TextInput::make('tel'),
+                Forms\Components\TextInput::make('wilaya'),
+                Forms\Components\TextInput::make('commune'),
+                Forms\Components\TextInput::make('adresse'),
 
                 Forms\Components\TextInput::make('quantity')
                 ->numeric()
@@ -62,7 +89,16 @@ class OrderResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('product.name'),
+                Tables\Columns\TextColumn::make('name'),
+                Tables\Columns\TextColumn::make('tel'),
+                Tables\Columns\TextColumn::make('wilaya'),
+                Tables\Columns\TextColumn::make('commune'),
+                Tables\Columns\TextColumn::make('adresse'),
+                Tables\Columns\TextColumn::make('quantity'),
+                Tables\Columns\TextColumn::make('price'),
+                Tables\Columns\TextColumn::make('total_price'),
+                Tables\Columns\TextColumn::make('status'),
             ])
             ->filters([
                 //
