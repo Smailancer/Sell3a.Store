@@ -11,19 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('orders', function (Blueprint $table) {
+        Schema::create('delivery_desks', function (Blueprint $table) {
             $table->id();
-            $table->string('number');
-            $table->enum('status', ['new', 'processing', 'shipped', 'delivered', 'cancelled'])->default('new');
-            $table->string('name');
-            $table->string('tel');
+            $table->foreignId('delivery_company_id')->constrained()->onDelete('cascade');
             $table->foreignId('wilaya_id')->constrained('wilayas')->onDelete('cascade');
             $table->foreignId('commune_id')->nullable()->constrained()->onDelete('set null');
             $table->foreignId('daira_id')->nullable()->constrained()->onDelete('set null');
-            $table->string('adresse');
-            $table->decimal('total_price', 8, 2);
-            $table->string('note');
-
+            $table->decimal('price', 8, 2)->nullable();
+            $table->string('phone1');
+            $table->string('phone2')->nullable();
+            $table->text('address')->nullable();
+            $table->text('note')->nullable();
             $table->timestamps();
         });
     }
@@ -33,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('orders');
+        Schema::dropIfExists('delivery_desks');
     }
 };

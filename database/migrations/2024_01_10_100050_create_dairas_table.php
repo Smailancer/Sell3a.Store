@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('delivery_companies', function (Blueprint $table) {
+        Schema::create('dairas', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('logo')->nullable();
-            $table->text('description')->nullable();
+            $table->string('name_ascii');
+            $table->foreignId('wilaya_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('delivery_companies');
+        Schema::dropIfExists('dairas');
     }
 };

@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class DeliveryCompany extends Model
+class Commune extends Model
 {
     use HasFactory;
 
-        public function desks()
+        public function daira()
     {
-        return $this->hasMany(DeliveryDesk::class);
+        return $this->belongsTo(Daira::class);
     }
 }

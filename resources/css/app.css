@@ -5,3 +5,8 @@
 [x-cloak] {
     display: none;
 }
+
+img.sell3a {
+    max-width: 10rem;
+    height: auto;
+}

@@ -11,15 +11,20 @@ class Product extends Model
 {
     use HasFactory;
 
+    protected $casts = [
+        'options' => 'array',
+        'image' => 'array',
+    ];
 
     public function store()
         {
             return $this->belongsTo(Store::class);
         }
 
-    public function orders()
-    {
-        return $this->belongsToMany(Order::class)->withPivot('quantity');
-    }
-
+        public function orders()
+        {
+            return $this->belongsToMany(Order::class)
+                        ->using(OrderProduct::class)
+                        ->withPivot(['quantity', 'price','options']);
+        }
 }
