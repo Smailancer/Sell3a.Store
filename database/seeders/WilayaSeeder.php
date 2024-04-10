@@ -14,7 +14,7 @@ class WilayaSeeder extends Seeder
     public function run(): void
     {
 
-        $path = database_path('data\algeria_cities.json');
+        $path = database_path('data/algeria_cities.json');
         $data = json_decode(file_get_contents($path), true);
 
         $wilayas = collect($data)->unique('wilaya_code');
