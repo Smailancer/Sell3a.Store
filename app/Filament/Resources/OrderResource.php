@@ -67,6 +67,7 @@ class OrderResource extends Resource
         return $table
             ->columns([
                 // Tables\Columns\TextColumn::make('product.name'),
+                Tables\Columns\TextColumn::make('number')->label("Order Code"),
                 Tables\Columns\TextColumn::make('name')->label("Client Name"),
                 Tables\Columns\TextColumn::make('tel'),
                 Tables\Columns\TextColumn::make('wilaya.name_ascii'),
