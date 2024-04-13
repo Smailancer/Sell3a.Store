@@ -10,3 +10,7 @@ img.sell3a {
     max-width: 10rem;
     height: auto;
 }
+
+.filament-main-topbar {
+    position: relative;
+}

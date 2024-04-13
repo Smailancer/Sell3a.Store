@@ -7,6 +7,8 @@
     'icon' => null,
     'iconSize' => IconSize::Medium,
     'tag' => 'div',
+    'profileRoute' => 'profile.show', // Define the profile route
+
 ])
 
 <{{ $tag }}
@@ -23,6 +25,7 @@
             ])
     }}
 >
+
     @if (filled($icon))
         <x-filament::icon
             :icon="$icon"

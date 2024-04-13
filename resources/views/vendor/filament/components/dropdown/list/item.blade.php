@@ -17,6 +17,8 @@
     'tag' => 'button',
     'target' => null,
     'tooltip' => null,
+    'profileRoute' => 'profile.show', // Define the profile route
+
 ])
 
 @php
@@ -93,6 +95,58 @@
 
     $hasTooltip = filled($tooltip);
 @endphp
+
+<!-- Profile item -->
+@if ($tag === 'button' || $tag === 'a' || $tag === 'form')
+
+    <a
+        href="{{ route($profileRoute) }}"
+        @if ($keyBindings || $hasTooltip)
+            x-data="{}"
+        @endif
+        @if ($keyBindings)
+            x-mousetrap.global.{{ collect($keyBindings)->map(fn (string $keyBinding): string => str_replace('+', '-', $keyBinding))->implode('.') }}
+        @endif
+        @if ($hasTooltip)
+            x-tooltip="{
+                content: @js($tooltip),
+                theme: $store.theme,
+            }"
+        @endif
+        {{
+            $attributes
+                ->class([$buttonClasses])
+                ->style([$buttonStyles])
+        }}
+    >
+        @if ($icon)
+            <x-filament::icon
+                :alias="$iconAlias"
+                :icon="$icon"
+                :class="$iconClasses"
+                :style="$iconStyles"
+            />
+        @endif
+
+        @if ($image)
+            <div
+                class="{{ $imageClasses }}"
+                style="background-image: url('{{ $image }}')"
+            ></div>
+        @endif
+
+        <span class="{{ $labelClasses }}" style="{{ $labelStyles }}">
+            {{ __('Profile') }} <!-- Change this to whatever text you want for the profile item -->
+        </span>
+
+        @if (filled($badge))
+            <x-filament::badge :color="$badgeColor" size="sm">
+                {{ $badge }}
+            </x-filament::badge>
+        @endif
+    </a>
+@endif
+
 
 @if ($tag === 'button')
     <button

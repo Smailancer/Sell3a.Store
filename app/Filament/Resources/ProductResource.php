@@ -71,6 +71,7 @@ class ProductResource extends Resource
                 ->image()
                 ->imageEditor()
                 ->reorderable()
+                ->acceptedFileTypes(['image/jpeg'])
                 // ->moveFiles()
                 // ->storeFiles(false)
                 ->maxFiles(5),
