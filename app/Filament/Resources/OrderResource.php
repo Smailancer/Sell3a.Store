@@ -49,13 +49,16 @@ class OrderResource extends Resource
                         Forms\Components\Section::make('Order Details')
                             ->schema(static::getDetailsFormSchema())
                             ->description('I) Client Details')
-
                             ->columns(2),
 
-                            Forms\Components\Section::make('Order Products')
+                            Forms\Components\Section::make('Products')
                             ->description('II) Products Details')
                             ->schema([static::getItemsRepeater()
                             ->columns(2),
+
+                            Forms\Components\Section::make('Delivery')
+                            ->description('III) Delivery Details')
+
                             ]),
                     ])
                     ->columnSpan(3),
@@ -68,6 +71,7 @@ class OrderResource extends Resource
             ->columns([
                 // Tables\Columns\TextColumn::make('product.name'),
                 Tables\Columns\TextColumn::make('number')->label("Order Code"),
+                Tables\Columns\TextColumn::make('orderProducts.product.name')->label("Products"),
                 Tables\Columns\TextColumn::make('name')->label("Client Name"),
                 Tables\Columns\TextColumn::make('tel'),
                 Tables\Columns\TextColumn::make('wilaya.name_ascii'),
@@ -79,6 +83,7 @@ class OrderResource extends Resource
 
                 // Tables\Columns\TextColumn::make('total_price'),
                 Tables\Columns\TextColumn::make('status'),
+                Tables\Columns\TextColumn::make('delivery'),
             ])
             ->filters([
                 //
